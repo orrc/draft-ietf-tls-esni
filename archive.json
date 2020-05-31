@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-05-27T21:48:34.846381+00:00",
+  "timestamp": "2020-05-31T12:50:35.559822+00:00",
   "repo": "tlswg/draft-ietf-tls-esni",
   "labels": [
     {
@@ -2994,7 +2994,7 @@
       ],
       "body": "To maximize the cover range for clients and simplify management of the ESNI records, it is more useful to associate the ESNI records with the server rather than the query domain name.  This has the additional benefit of allowing different client-facing servers to use different rotating private DH keys.\r\n\r\nThis eliminates the issues with CNAMEs, individual query domain holders having to make changes, DNS namespace issues etc.\r\n\r\nFor example a large hoster wishing to provide cover for some clients by having their primary / CDN front ends offer ESNI for all requests can then simply enable the code on their server then add the ESNI records.  They can even do this gradually over a large pool of servers, thus having some servers with different (or no) ESNI support during each careful rollout of ESNI software upgrades.\r\n\r\nIn practice the following conventions would be used:\r\n\r\n1. Any ESNI server IP must have exactly one PTR record (typically pointing to the hoster domain, such as a typical systematic CDN node DNS name).  Lets call this name ptrnam.dom\r\n\r\n2. The ESNI records would be under _esni.ptrnam.dom\r\n\r\n3. As with most PTR records ptrnam.dom is expected to have exactly one AAAA or A record pointing back at the same IP (if the starting IP is IPv6 only AAAA need to satisfy this, if IPv4 only A, the same ptrnam.dom can be used for one IPv4 and one IPv6 address if the ESNI records would be the same).\r\n\r\n4. For address-less server types such as tor hidden services, the ESNI records would be published via whatever DNS or DNS-like mechanism is used for that transport, or queried by sending a DNS query for the record to the target, allowing the target to respond within that transport.\r\n\r\nBenefits:\r\n\r\n- B1. Large client-facing servers such as CDNs and shared IP hosters can deploy ESNI without having to negotiate DNS changes with all their customers (in fact with any of their customers).\r\n\r\n- B2. Operators of large pools of client-facing servers such as CDNs can roll out ESNI support and ESNI implementation upgrades in a piecemeal and controlled manner similar to how other system updates are rolled out.  Simply because each IP address will have its own ESNI records.\r\n\r\n- B3. ESNI key rotation becomes much simpler as there is no need to synchronize it between different servers in a pool (except where a pure layer 1/2/3 load balancer shares a single IP among multiple physical/virtual servers, such as the layer 2 HALinux scheme).\r\n\r\n- B4. ESNI private key protection can be much stronger when it is not shared among all the servers.  The private key may be kept in protected hardware and/or in volatile RAM.  The latter case would require clients to fall back to a different A or AAAA record until the DNS entries for now forgotten keys to have expired, but only in case of a server crash or similar event.\r\n\r\n- B5. Client queries for ESNI records do not reveal the actual query domain that will be encrypted, only the IP address to which the ESNI extension will be sent.\r\n\r\n- B6. The whole discussion about _esni prefix or no _esni prefix becomes a lot simpler when there is no need to put ESNI records in every end query domain, only domains of the client-facing servers, allowing to keep the unprefixed TXT name space clean for existing uses such as SPF.\r\n\r\nDownsides:\r\n\r\n- P1: Clients will have to postpone the _esni DNS query until after receiving the answer to the A or AAAA query, thus adding an extra DNS roundtrip before the first connection to a name.  The usual DNS caching hierarchy should mitigate this.  In particular for popular CDNs, a client will typically use the same handful of IPs for lots of unrelated traffic, thus getting the ESNI records in its local cache.\r\n\r\n- P2: VM hosting/Physical hosting/connectivity providers not granting PTR name assignment control to IP address customers will cause the same problems as for other protocols (such as mail) and should thus be under the same or greater pressure to add that service.  However since the greatest ESNI benefit is with IPs shared among many unrelated domains, and the operators of such IPs typically have full IP space ownership or the leverage to get PTR records where normal customers cannnot, the effect on ESNI deployment should be limited.\r\n\r\n- P3: This may or may not make it easier to do spoofing attacks, as an MitM attacker can spoof DNS responses either for the A/AAAA records of a target query domain (pointing to servers entirely under the attackers control, including legitimate ESNI records for that server) OR spoof the ESNI records of a server address for which the attacker has obtained traffic intercept ability.  However these can be secured with the same DNS countermeasures already applicable to those DNS domains.\r\n\r\n- P4: query domains wishing to remain available in massively blocking markets (the kind that would not hesitate to block an entire CDN to stop access to a single web page) may have more difficulty opting out of ESNI so such blocking filters can recognize them as a permitted service.\r\n",
       "createdAt": "2019-03-01T18:35:45Z",
-      "updatedAt": "2020-05-27T12:20:57Z",
+      "updatedAt": "2020-05-28T03:57:18Z",
       "closedAt": "2020-05-27T12:20:56Z",
       "comments": [
         {
@@ -3038,6 +3038,20 @@
           "body": "I think this is orthogonal to the contents of the draft. Namely, servers could maintain this sort of IP<->key association on their own without any client changes. Thus, closing as is. Please re-open if you think otherwise and have a suggested change for the document!",
           "createdAt": "2020-05-27T12:20:56Z",
           "updatedAt": "2020-05-27T12:20:56Z"
+        },
+        {
+          "author": "jb-wisemo",
+          "authorAssociation": "NONE",
+          "body": "Closing reason seems a complete misunderstanding.  I have not checked how my old wording fits or does not fit the current draft.\r\n\r\nIssue #139 is about handling multiple public servers (with different \"client-facing\" server IPs and different configuration), not about tracking client IPs.",
+          "createdAt": "2020-05-28T03:55:26Z",
+          "updatedAt": "2020-05-28T03:55:26Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The reasoning above isn\u2019t about tracking client IPs. Please give the latest draft a review and re-open if you think it\u2019s needed. And please provide suggested changes if they\u2019re needed!",
+          "createdAt": "2020-05-28T03:57:18Z",
+          "updatedAt": "2020-05-28T03:57:18Z"
         }
       ]
     },
@@ -4695,15 +4709,15 @@
       "id": "MDU6SXNzdWU1OTg1Njc0Nzc=",
       "title": "two type codes needed for interop",
       "url": "https://github.com/tlswg/draft-ietf-tls-esni/issues/220",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "sftcd",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "We need to pick some values for the \"encrypted_client_hello(TBD)\" and for the HTTPSSVC RR type before we can do interop. Allocating some values from the private ranges for those before draft-07 is pushed out would be good so we can do some interop testing. (Or for whatever is the next draft for which we want to do interop.)",
       "createdAt": "2020-04-12T20:43:00Z",
-      "updatedAt": "2020-04-12T20:43:00Z",
-      "closedAt": null,
+      "updatedAt": "2020-05-27T21:48:52Z",
+      "closedAt": "2020-05-27T21:48:52Z",
       "comments": []
     },
     {
@@ -4838,6 +4852,30 @@
           "body": "Done in #238.",
           "createdAt": "2020-05-26T21:19:25Z",
           "updatedAt": "2020-05-26T21:19:25Z"
+        }
+      ]
+    },
+    {
+      "number": 240,
+      "id": "MDU6SXNzdWU2MjYwNTczMTU=",
+      "title": "Consider strict ECH mode",
+      "url": "https://github.com/tlswg/draft-ietf-tls-esni/issues/240",
+      "state": "OPEN",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "From a TODO in the draft:\r\n\r\nKey replacement is significantly less scary than saying that ECH-naive servers bounce ECH off. Is it worth defining a strict mode toggle in the ECH keys, for a deployment to indicate it is ready for that?\r\n\r\ncc @davidben ",
+      "createdAt": "2020-05-27T21:51:02Z",
+      "updatedAt": "2020-05-28T16:02:56Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "davidben",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I imagine clients that talk to general HTTPS servers like browsers wouldn't do this, but maybe more dedicated clients would? I work on a browser and don't know much about those kinds of use cases, so I figured I'd leave it as a TODO in case the WG felt strongly one way or another.",
+          "createdAt": "2020-05-28T16:02:56Z",
+          "updatedAt": "2020-05-28T16:02:56Z"
         }
       ]
     }
@@ -16492,20 +16530,76 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDIzNDc1ODk1",
       "title": "Specify encrypted_client_hello and outer_extension codepoints.",
       "url": "https://github.com/tlswg/draft-ietf-tls-esni/pull/239",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Once we have some implementations that interop, we'll go ahead with early\r\ncodepoint allocation.\r\n\r\nThe new version matches -07, which will be the next draft version we submit.\r\n\r\ncc @martinthomson @grittygrease \r\n\r\nCloses #220.",
       "createdAt": "2020-05-26T21:34:38Z",
-      "updatedAt": "2020-05-26T21:42:52Z",
+      "updatedAt": "2020-05-27T21:48:53Z",
       "baseRepository": "tlswg/draft-ietf-tls-esni",
       "baseRefName": "master",
       "baseRefOid": "a522e66aab86f9db0ce73edb999339887fa5a8ff",
       "headRepository": "tlswg/draft-ietf-tls-esni",
       "headRefName": "caw/codepoints",
       "headRefOid": "16070b4d44fdf7a350765ecbe65ef58fe495ba34",
+      "closedAt": "2020-05-27T21:48:52Z",
+      "mergedAt": "2020-05-27T21:48:52Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "37854299237b63b0731bfd7c2399cbe80f82d662"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 241,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDI0MTMzOTIy",
+      "title": "Remove stale TODOs.",
+      "url": "https://github.com/tlswg/draft-ietf-tls-esni/pull/241",
+      "state": "MERGED",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The misrouting content no longer applies since the backend server sees the full CH, with the true SNI.",
+      "createdAt": "2020-05-27T21:56:17Z",
+      "updatedAt": "2020-05-27T21:56:38Z",
+      "baseRepository": "tlswg/draft-ietf-tls-esni",
+      "baseRefName": "master",
+      "baseRefOid": "37854299237b63b0731bfd7c2399cbe80f82d662",
+      "headRepository": "tlswg/draft-ietf-tls-esni",
+      "headRefName": "caw/remove-stale-todos",
+      "headRefOid": "32f9d2bff330bb426838540d239e54631c84f377",
+      "closedAt": "2020-05-27T21:56:38Z",
+      "mergedAt": "2020-05-27T21:56:38Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "24f09934836f920a0f883be65207afb6d40f67be"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 242,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDI1NjA3MjQy",
+      "title": "Revert to experimental codepoints.",
+      "url": "https://github.com/tlswg/draft-ietf-tls-esni/pull/242",
+      "state": "OPEN",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "We'll request early codepoints after we get some implementation experience.",
+      "createdAt": "2020-05-31T12:50:33Z",
+      "updatedAt": "2020-05-31T12:50:33Z",
+      "baseRepository": "tlswg/draft-ietf-tls-esni",
+      "baseRefName": "master",
+      "baseRefOid": "24f09934836f920a0f883be65207afb6d40f67be",
+      "headRepository": "tlswg/draft-ietf-tls-esni",
+      "headRefName": "caw/exp-codepoints",
+      "headRefOid": "bfaf546a247080946e0ecbf45c7d05ece047af34",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
