@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-05-31T12:50:35.559822+00:00",
+  "timestamp": "2020-06-04T23:27:45.243539+00:00",
   "repo": "tlswg/draft-ietf-tls-esni",
   "labels": [
     {
@@ -16586,26 +16586,118 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDI1NjA3MjQy",
       "title": "Revert to experimental codepoints.",
       "url": "https://github.com/tlswg/draft-ietf-tls-esni/pull/242",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "We'll request early codepoints after we get some implementation experience.",
       "createdAt": "2020-05-31T12:50:33Z",
-      "updatedAt": "2020-05-31T12:50:33Z",
+      "updatedAt": "2020-05-31T18:45:45Z",
       "baseRepository": "tlswg/draft-ietf-tls-esni",
       "baseRefName": "master",
       "baseRefOid": "24f09934836f920a0f883be65207afb6d40f67be",
       "headRepository": "tlswg/draft-ietf-tls-esni",
       "headRefName": "caw/exp-codepoints",
       "headRefOid": "bfaf546a247080946e0ecbf45c7d05ece047af34",
+      "closedAt": "2020-05-31T18:45:45Z",
+      "mergedAt": "2020-05-31T18:45:45Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "ed0b844eb2742f2820b9bd6b5829f493c36e628f"
+      },
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I have no objection to echo_nonce -> echo_nonce_value but did you mean to do it in this PR?\r\n\r\nYeah, as I was specifying the extension codepoint I noticed the collision between this variable, so I figured changing it here was best.",
+          "createdAt": "2020-05-31T18:45:41Z",
+          "updatedAt": "2020-05-31T18:45:41Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxNTE2OTcw",
+          "commit": {
+            "abbreviatedOid": "bfaf546"
+          },
+          "author": "ekr",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "I have no objection to echo_nonce -> echo_nonce_value but did you mean to do it in this PR?",
+          "createdAt": "2020-05-31T18:25:47Z",
+          "updatedAt": "2020-05-31T18:25:47Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 243,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDI3NTgxMDQ2",
+      "title": "empty or random record digest for privacy",
+      "url": "https://github.com/tlswg/draft-ietf-tls-esni/pull/243",
+      "state": "OPEN",
+      "author": "huitema",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As discussed on the list, add a small bit of text in the section 10.3 to outline the behavior of clients seeking to protect server's privacy.",
+      "createdAt": "2020-06-04T04:29:30Z",
+      "updatedAt": "2020-06-04T04:29:30Z",
+      "baseRepository": "tlswg/draft-ietf-tls-esni",
+      "baseRefName": "master",
+      "baseRefOid": "ed0b844eb2742f2820b9bd6b5829f493c36e628f",
+      "headRepository": "huitema/draft-ietf-tls-esni",
+      "headRefName": "record-digest-privacy",
+      "headRefOid": "e04d483bff5649c8832f2da43913fa0d4a39980f",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 244,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDI4MTEyNDE0",
+      "title": "Fix typo of \"ClientHelloInner\".",
+      "url": "https://github.com/tlswg/draft-ietf-tls-esni/pull/244",
+      "state": "MERGED",
+      "author": "dmcardle",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2020-06-04T21:57:51Z",
+      "updatedAt": "2020-06-04T23:27:15Z",
+      "baseRepository": "tlswg/draft-ietf-tls-esni",
+      "baseRefName": "master",
+      "baseRefOid": "ed0b844eb2742f2820b9bd6b5829f493c36e628f",
+      "headRepository": "dmcardle/draft-ietf-tls-esni",
+      "headRefName": "master",
+      "headRefOid": "5264fbf087a9c3c63f444562517522c2662588af",
+      "closedAt": "2020-06-04T23:27:15Z",
+      "mergedAt": "2020-06-04T23:27:15Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "3dca4fddac8ca04c430ef8348427241a67cca83b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDI0OTAwODQy",
+          "commit": {
+            "abbreviatedOid": "5264fbf"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-06-04T23:27:10Z",
+          "updatedAt": "2020-06-04T23:27:10Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
