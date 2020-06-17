@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-06-04T23:27:45.243539+00:00",
+  "timestamp": "2020-06-17T18:16:58.990717+00:00",
   "repo": "tlswg/draft-ietf-tls-esni",
   "labels": [
     {
@@ -4878,6 +4878,22 @@
           "updatedAt": "2020-05-28T16:02:56Z"
         }
       ]
+    },
+    {
+      "number": 245,
+      "id": "MDU6SXNzdWU2NDAzMTIxNjk=",
+      "title": "Describe risks and mitigations for privacy leaks from configuration digest",
+      "url": "https://github.com/tlswg/draft-ietf-tls-esni/issues/245",
+      "state": "OPEN",
+      "author": "sharpie7",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The ID proposes an optional configuration digest parameter to be included in the clientHello. This parameter is advantageous because it improves the efficiency of the solution by avoiding the server having to do trial decryptions. However, in some scenarios the configuration digest could leak privacy information. In version 7 of the ID, section 10.2 on \u201cClient Tracking\u201d describes one scenario, but there are others. A more complete and general discussion of the risks and mitigations would be useful.\r\n\r\nIf a particular domain has a unique public key then the configuration digest becomes a fingerprint for that domain. An attacker that has a list of such domains that they want to monitor can build a dictionary of the corresponding digests use this to identify traffic to the domains on their list.\r\n\r\nSome mitigations could be:\r\n1)\tAvoid the use of configuration digest\r\n2)\tOnly deploy in a mode where many domains share the same public key to make finger-printing too general to be useful\r\n3)\tTo change keys faster than attackers can update their list of fingerprints\r\n",
+      "createdAt": "2020-06-17T10:02:52Z",
+      "updatedAt": "2020-06-17T10:02:52Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -16636,26 +16652,62 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDI3NTgxMDQ2",
       "title": "empty or random record digest for privacy",
       "url": "https://github.com/tlswg/draft-ietf-tls-esni/pull/243",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "huitema",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "As discussed on the list, add a small bit of text in the section 10.3 to outline the behavior of clients seeking to protect server's privacy.",
       "createdAt": "2020-06-04T04:29:30Z",
-      "updatedAt": "2020-06-04T04:29:30Z",
+      "updatedAt": "2020-06-04T23:51:37Z",
       "baseRepository": "tlswg/draft-ietf-tls-esni",
       "baseRefName": "master",
       "baseRefOid": "ed0b844eb2742f2820b9bd6b5829f493c36e628f",
       "headRepository": "huitema/draft-ietf-tls-esni",
       "headRefName": "record-digest-privacy",
-      "headRefOid": "e04d483bff5649c8832f2da43913fa0d4a39980f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "acdf2cc48fdbc2b2ff47f103787c9efd0e6c5aef",
+      "closedAt": "2020-06-04T23:51:36Z",
+      "mergedAt": "2020-06-04T23:51:36Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "a40e95338385ef628cff3896ed61c31939143dd0"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDI0OTAzMTE1",
+          "commit": {
+            "abbreviatedOid": "e04d483"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Thanks for clarifying! I suggested some language tweaks, but the core idea remains. ",
+          "createdAt": "2020-06-04T23:30:47Z",
+          "updatedAt": "2020-06-04T23:32:43Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "```suggestion\r\n\"encrypted_client_hello\" extension. In such settings, clients send \r\neither an empty record_digest or a randomly generated record_digest\r\nin the ClientEncryptedCH. (The precise implementation choice for this\r\nmechanism is out of scope for this document.) Servers in these settings \r\nmust perform trial decryption since they cannot identify the client's chosen \r\nECH key using the record_digest value. As a result, support for optional \r\nrecord digests may exacerbate DoS attacks.\r\n```",
+              "createdAt": "2020-06-04T23:30:47Z",
+              "updatedAt": "2020-06-04T23:48:07Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDI0OTExMjkz",
+          "commit": {
+            "abbreviatedOid": "acdf2cc"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks!",
+          "createdAt": "2020-06-04T23:51:32Z",
+          "updatedAt": "2020-06-04T23:51:32Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 244,
@@ -16698,6 +16750,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 246,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDM2MDE3NDU1",
+      "title": "Adopt new HTTPS RR name.",
+      "url": "https://github.com/tlswg/draft-ietf-tls-esni/pull/246",
+      "state": "OPEN",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "See https://datatracker.ietf.org/doc/draft-ietf-dnsop-svcb-https/. Hopefully this one sticks.",
+      "createdAt": "2020-06-17T18:16:41Z",
+      "updatedAt": "2020-06-17T18:16:41Z",
+      "baseRepository": "tlswg/draft-ietf-tls-esni",
+      "baseRefName": "master",
+      "baseRefOid": "a40e95338385ef628cff3896ed61c31939143dd0",
+      "headRepository": "tlswg/draft-ietf-tls-esni",
+      "headRefName": "caw/https-rr",
+      "headRefOid": "eb764befd43ec4a827757effb39449d7cf253d25",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
