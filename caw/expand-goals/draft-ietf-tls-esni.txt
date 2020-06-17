@@ -1082,11 +1082,9 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
    different ECHConfig values based on the
    ClientEncryptedCH.record_digest value.  This also means public
    information in a TLS handshake is also consistent across hosts.  For
-   example, if a client-facing server services k backend origin hosts,
-   and exactly one of those backend origin hosts supports a different
-   TLS configuration, such as a different set of cryptographic
-   algorithms than the other (k - 1) hosts, it may be possible to
-   identify this single host based on the contents of unencrypted
+   example, if a client-facing server services many backend origin
+   hosts, only one of which supports some cipher suite, it may be
+   possible to identify that host based on the contents of unencrypted
    handshake messages.
 
 10.2.  Unauthenticated and Cleartext DNS
@@ -1111,6 +1109,8 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
    where ClientHello and SNI encryption are desired.  Moreover, as noted
    in the introduction, SNI encryption is less useful without encryption
    of DNS queries in transit via DoH or DPRIVE mechanisms.
+
+
 
 
 
