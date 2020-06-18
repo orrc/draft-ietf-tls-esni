@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-06-17T18:16:58.990717+00:00",
+  "timestamp": "2020-06-18T02:33:33.227104+00:00",
   "repo": "tlswg/draft-ietf-tls-esni",
   "labels": [
     {
@@ -4860,15 +4860,15 @@
       "id": "MDU6SXNzdWU2MjYwNTczMTU=",
       "title": "Consider strict ECH mode",
       "url": "https://github.com/tlswg/draft-ietf-tls-esni/issues/240",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "From a TODO in the draft:\r\n\r\nKey replacement is significantly less scary than saying that ECH-naive servers bounce ECH off. Is it worth defining a strict mode toggle in the ECH keys, for a deployment to indicate it is ready for that?\r\n\r\ncc @davidben ",
       "createdAt": "2020-05-27T21:51:02Z",
-      "updatedAt": "2020-05-28T16:02:56Z",
-      "closedAt": null,
+      "updatedAt": "2020-06-17T18:40:14Z",
+      "closedAt": "2020-06-17T18:40:14Z",
       "comments": [
         {
           "author": "davidben",
@@ -4876,6 +4876,13 @@
           "body": "I imagine clients that talk to general HTTPS servers like browsers wouldn't do this, but maybe more dedicated clients would? I work on a browser and don't know much about those kinds of use cases, so I figured I'd leave it as a TODO in case the WG felt strongly one way or another.",
           "createdAt": "2020-05-28T16:02:56Z",
           "updatedAt": "2020-05-28T16:02:56Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Given that no one asked for this, I'm inclined to close this without action. So... doing that now. :)",
+          "createdAt": "2020-06-17T18:40:14Z",
+          "updatedAt": "2020-06-17T18:40:14Z"
         }
       ]
     },
@@ -16756,26 +16763,155 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDM2MDE3NDU1",
       "title": "Adopt new HTTPS RR name.",
       "url": "https://github.com/tlswg/draft-ietf-tls-esni/pull/246",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "See https://datatracker.ietf.org/doc/draft-ietf-dnsop-svcb-https/. Hopefully this one sticks.",
       "createdAt": "2020-06-17T18:16:41Z",
-      "updatedAt": "2020-06-17T18:16:41Z",
+      "updatedAt": "2020-06-18T02:33:07Z",
       "baseRepository": "tlswg/draft-ietf-tls-esni",
       "baseRefName": "master",
       "baseRefOid": "a40e95338385ef628cff3896ed61c31939143dd0",
       "headRepository": "tlswg/draft-ietf-tls-esni",
       "headRefName": "caw/https-rr",
       "headRefOid": "eb764befd43ec4a827757effb39449d7cf253d25",
+      "closedAt": "2020-06-18T02:33:06Z",
+      "mergedAt": "2020-06-18T02:33:06Z",
+      "mergedBy": "ekr",
+      "mergeCommit": {
+        "oid": "cb08c09093b1c6119707516a93ea9a008dc47139"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 247,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDM2MDI3OTY3",
+      "title": "Expand text around security and privacy goals.",
+      "url": "https://github.com/tlswg/draft-ietf-tls-esni/pull/247",
+      "state": "OPEN",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Addresses #245.",
+      "createdAt": "2020-06-17T18:39:45Z",
+      "updatedAt": "2020-06-17T23:43:09Z",
+      "baseRepository": "tlswg/draft-ietf-tls-esni",
+      "baseRefName": "master",
+      "baseRefOid": "a40e95338385ef628cff3896ed61c31939143dd0",
+      "headRepository": "tlswg/draft-ietf-tls-esni",
+      "headRefName": "caw/expand-goals",
+      "headRefOid": "2ce972f8b8236b16ea214fefb0ab925693097598",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDMyNjkyMjAy",
+          "commit": {
+            "abbreviatedOid": "b59c873"
+          },
+          "author": "davidben",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-17T19:03:01Z",
+          "updatedAt": "2020-06-17T19:03:02Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "Same ECHConfig is necessary, but not sufficient I think. If the hosts share an ECHConfig but have not other TLS config (the deleted paragraph above), the hosts are distinguishable. (I've lost track of whether the current level of ClientHello binding is sufficient to limit this to anonymity within the negotiated values or the full config...) The third paragraph mentions this, but it seems to be clarifying point (2), but point (2) doesn't actually imply this.",
+              "createdAt": "2020-06-17T19:03:01Z",
+              "updatedAt": "2020-06-17T19:21:39Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDMyNjkzMjcz",
+          "commit": {
+            "abbreviatedOid": "b59c873"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-17T19:04:41Z",
+          "updatedAt": "2020-06-17T19:04:41Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "Fair :) I was trying to get away without too much text. I can clarify that this is necessary (and rework text accordingly).",
+              "createdAt": "2020-06-17T19:04:41Z",
+              "updatedAt": "2020-06-17T19:21:39Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDMyNjk3MDU5",
+          "commit": {
+            "abbreviatedOid": "c48746c"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-17T19:10:08Z",
+          "updatedAt": "2020-06-17T19:10:08Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "@davidben, reworked. Please have another look!",
+              "createdAt": "2020-06-17T19:10:08Z",
+              "updatedAt": "2020-06-17T19:21:39Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDMyNzAzNjU3",
+          "commit": {
+            "abbreviatedOid": "1630c00"
+          },
+          "author": "davidben",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-06-17T19:19:50Z",
+          "updatedAt": "2020-06-17T19:20:11Z",
+          "comments": [
+            {
+              "originalPosition": 40,
+              "body": "Super nitpicky nitpick: we can probably trim the \"For example, [...]\" sentence down to:\r\n\r\nFor example, if a client-facing server services many backend origin hosts, only one of which supports some cipher suite, it may be possible to identify that host based on the contents of unencrypted handshake messages.\r\n\r\n(It's already giving an example, and being more specific uses fewer words.)",
+              "createdAt": "2020-06-17T19:19:50Z",
+              "updatedAt": "2020-06-17T19:21:39Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDMyNzA0MzEx",
+          "commit": {
+            "abbreviatedOid": "1630c00"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-17T19:20:48Z",
+          "updatedAt": "2020-06-17T19:20:49Z",
+          "comments": [
+            {
+              "originalPosition": 40,
+              "body": "Works for me -- thanks!",
+              "createdAt": "2020-06-17T19:20:49Z",
+              "updatedAt": "2020-06-17T19:21:39Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
