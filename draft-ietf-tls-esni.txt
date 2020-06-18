@@ -5,11 +5,11 @@
 tls                                                          E. Rescorla
 Internet-Draft                                                RTFM, Inc.
 Intended status: Experimental                                     K. Oku
-Expires: 6 December 2020                                          Fastly
+Expires: 20 December 2020                                         Fastly
                                                              N. Sullivan
                                                                C.A. Wood
                                                               Cloudflare
-                                                             4 June 2020
+                                                            18 June 2020
 
 
                        TLS Encrypted Client Hello
@@ -35,7 +35,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 December 2020.
+   This Internet-Draft will expire on 20 December 2020.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Rescorla, et al.         Expires 6 December 2020                [Page 1]
+Rescorla, et al.        Expires 20 December 2020                [Page 1]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Rescorla, et al.         Expires 6 December 2020                [Page 2]
+Rescorla, et al.        Expires 20 December 2020                [Page 2]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -165,7 +165,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020                [Page 3]
+Rescorla, et al.        Expires 20 December 2020                [Page 3]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -221,7 +221,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020                [Page 4]
+Rescorla, et al.        Expires 20 December 2020                [Page 4]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -252,7 +252,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
    directly or indirectly (via Split Mode).  This document defines the
    format of the SNI encryption public key and metadata, referred to as
    an ECH configuration, and delegates DNS publication details to
-   [HTTPSSVC], though other delivery mechanisms are possible.  In
+   [HTTPS-RR], though other delivery mechanisms are possible.  In
    particular, if some of the clients of a private server are
    applications rather than Web browsers, those applications might have
    the public key and metadata preconfigured.
@@ -277,7 +277,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020                [Page 5]
+Rescorla, et al.        Expires 20 December 2020                [Page 5]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -333,7 +333,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020                [Page 6]
+Rescorla, et al.        Expires 20 December 2020                [Page 6]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -389,7 +389,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020                [Page 7]
+Rescorla, et al.        Expires 20 December 2020                [Page 7]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -445,7 +445,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020                [Page 8]
+Rescorla, et al.        Expires 20 December 2020                [Page 8]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -501,7 +501,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020                [Page 9]
+Rescorla, et al.        Expires 20 December 2020                [Page 9]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -557,7 +557,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020               [Page 10]
+Rescorla, et al.        Expires 20 December 2020               [Page 10]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -613,7 +613,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020               [Page 11]
+Rescorla, et al.        Expires 20 December 2020               [Page 11]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -669,7 +669,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020               [Page 12]
+Rescorla, et al.        Expires 20 December 2020               [Page 12]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -725,7 +725,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020               [Page 13]
+Rescorla, et al.        Expires 20 December 2020               [Page 13]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -781,7 +781,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020               [Page 14]
+Rescorla, et al.        Expires 20 December 2020               [Page 14]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -837,7 +837,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020               [Page 15]
+Rescorla, et al.        Expires 20 December 2020               [Page 15]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -893,7 +893,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020               [Page 16]
+Rescorla, et al.        Expires 20 December 2020               [Page 16]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -949,7 +949,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020               [Page 17]
+Rescorla, et al.        Expires 20 December 2020               [Page 17]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -1005,7 +1005,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020               [Page 18]
+Rescorla, et al.        Expires 20 December 2020               [Page 18]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -1061,7 +1061,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020               [Page 19]
+Rescorla, et al.        Expires 20 December 2020               [Page 19]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -1102,7 +1102,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
    The cost of this type of attack scales linearly with the desired
    number of target clients.  Moreover, DNS caching behavior makes
    targeting individual users for extended periods of time, e.g., using
-   per-client ECHConfig structures delivered via HTTPSSVC RRs with high
+   per-client ECHConfig structures delivered via HTTPS RRs with high
    TTLs, challenging.  Clients can help mitigate this problem by
    flushing any DNS or ECHConfig state upon changing networks.
 
@@ -1117,7 +1117,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020               [Page 20]
+Rescorla, et al.        Expires 20 December 2020               [Page 20]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -1173,7 +1173,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020               [Page 21]
+Rescorla, et al.        Expires 20 December 2020               [Page 21]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -1229,7 +1229,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020               [Page 22]
+Rescorla, et al.        Expires 20 December 2020               [Page 22]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -1285,7 +1285,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020               [Page 23]
+Rescorla, et al.        Expires 20 December 2020               [Page 23]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -1341,7 +1341,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020               [Page 24]
+Rescorla, et al.        Expires 20 December 2020               [Page 24]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -1397,7 +1397,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020               [Page 25]
+Rescorla, et al.        Expires 20 December 2020               [Page 25]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -1453,7 +1453,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020               [Page 26]
+Rescorla, et al.        Expires 20 December 2020               [Page 26]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -1478,12 +1478,11 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 13.1.  Normative References
 
-   [HTTPSSVC] Schwartz, B., Bishop, M., and E. Nygren, "Service binding
+   [HTTPS-RR] Schwartz, B., Bishop, M., and E. Nygren, "Service binding
               and parameter specification via the DNS (DNS SVCB and
-              HTTPSSVC)", Work in Progress, Internet-Draft, draft-
-              nygren-dnsop-svcb-httpssvc-00, 23 September 2019,
-              <http://www.ietf.org/internet-drafts/draft-nygren-dnsop-
-              svcb-httpssvc-00.txt>.
+              HTTPS RRs)", Work in Progress, Internet-Draft, draft-ietf-
+              dnsop-svcb-https-00, 12 June 2020, <http://www.ietf.org/
+              internet-drafts/draft-ietf-dnsop-svcb-https-00.txt>.
 
    [I-D.ietf-tls-exported-authenticator]
               Sullivan, N., "Exported Authenticators in TLS", Work in
@@ -1509,7 +1508,8 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020               [Page 27]
+
+Rescorla, et al.        Expires 20 December 2020               [Page 27]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -1565,7 +1565,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
 
-Rescorla, et al.         Expires 6 December 2020               [Page 28]
+Rescorla, et al.        Expires 20 December 2020               [Page 28]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -1621,7 +1621,7 @@ A.1.1.  TLS in Early Data
 
 
 
-Rescorla, et al.         Expires 6 December 2020               [Page 29]
+Rescorla, et al.        Expires 20 December 2020               [Page 29]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -1677,7 +1677,7 @@ Appendix B.  Total Client Hello Encryption
 
 
 
-Rescorla, et al.         Expires 6 December 2020               [Page 30]
+Rescorla, et al.        Expires 20 December 2020               [Page 30]
 
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
@@ -1733,4 +1733,4 @@ Authors' Addresses
 
 
 
-Rescorla, et al.         Expires 6 December 2020               [Page 31]
+Rescorla, et al.        Expires 20 December 2020               [Page 31]
