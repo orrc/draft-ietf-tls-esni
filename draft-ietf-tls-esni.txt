@@ -81,31 +81,31 @@ Table of Contents
    9.  Compatibility Issues  . . . . . . . . . . . . . . . . . . . .  18
      9.1.  Misconfiguration and Deployment Concerns  . . . . . . . .  18
      9.2.  Middleboxes . . . . . . . . . . . . . . . . . . . . . . .  19
-   10. Security Considerations . . . . . . . . . . . . . . . . . . .  20
-     10.1.  Why is cleartext DNS OK? . . . . . . . . . . . . . . . .  20
-     10.2.  Client Tracking  . . . . . . . . . . . . . . . . . . . .  20
-     10.3.  Optional Record Digests and Trial Decryption . . . . . .  20
-     10.4.  Related Privacy Leaks  . . . . . . . . . . . . . . . . .  21
-     10.5.  Comparison Against Criteria  . . . . . . . . . . . . . .  21
-       10.5.1.  Mitigate against replay attacks  . . . . . . . . . .  21
-       10.5.2.  Avoid widely-deployed shared secrets . . . . . . . .  22
-       10.5.3.  Prevent SNI-based DoS attacks  . . . . . . . . . . .  22
-       10.5.4.  Do not stick out . . . . . . . . . . . . . . . . . .  22
-       10.5.5.  Forward secrecy  . . . . . . . . . . . . . . . . . .  22
-       10.5.6.  Proper security context  . . . . . . . . . . . . . .  22
-       10.5.7.  Split server spoofing  . . . . . . . . . . . . . . .  23
-       10.5.8.  Supporting multiple protocols  . . . . . . . . . . .  23
-     10.6.  Padding Policy . . . . . . . . . . . . . . . . . . . . .  23
-     10.7.  Active Attack Mitigations  . . . . . . . . . . . . . . .  23
-       10.7.1.  Client Reaction Attack Mitigation  . . . . . . . . .  23
-       10.7.2.  HelloRetryRequest Hijack Mitigation  . . . . . . . .  24
-       10.7.3.  Resumption PSK Oracle Mitigation . . . . . . . . . .  25
-   11. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  26
-     11.1.  Update of the TLS ExtensionType Registry . . . . . . . .  26
+   10. Security Considerations . . . . . . . . . . . . . . . . . . .  19
+     10.1.  Security and Privacy Goals . . . . . . . . . . . . . . .  19
+     10.2.  Unauthenticated and Cleartext DNS  . . . . . . . . . . .  20
+     10.3.  Client Tracking  . . . . . . . . . . . . . . . . . . . .  21
+     10.4.  Optional Record Digests and Trial Decryption . . . . . .  21
+     10.5.  Related Privacy Leaks  . . . . . . . . . . . . . . . . .  21
+     10.6.  Comparison Against Criteria  . . . . . . . . . . . . . .  22
+       10.6.1.  Mitigate against replay attacks  . . . . . . . . . .  22
+       10.6.2.  Avoid widely-deployed shared secrets . . . . . . . .  22
+       10.6.3.  Prevent SNI-based DoS attacks  . . . . . . . . . . .  22
+       10.6.4.  Do not stick out . . . . . . . . . . . . . . . . . .  23
+       10.6.5.  Forward secrecy  . . . . . . . . . . . . . . . . . .  23
+       10.6.6.  Proper security context  . . . . . . . . . . . . . .  23
+       10.6.7.  Split server spoofing  . . . . . . . . . . . . . . .  23
+       10.6.8.  Supporting multiple protocols  . . . . . . . . . . .  23
+     10.7.  Padding Policy . . . . . . . . . . . . . . . . . . . . .  24
+     10.8.  Active Attack Mitigations  . . . . . . . . . . . . . . .  24
+       10.8.1.  Client Reaction Attack Mitigation  . . . . . . . . .  24
+       10.8.2.  HelloRetryRequest Hijack Mitigation  . . . . . . . .  25
+       10.8.3.  Resumption PSK Oracle Mitigation . . . . . . . . . .  26
+   11. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  27
+     11.1.  Update of the TLS ExtensionType Registry . . . . . . . .  27
      11.2.  Update of the TLS Alert Registry . . . . . . . . . . . .  27
    12. ECHConfig Extension Guidance  . . . . . . . . . . . . . . . .  27
    13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  27
-     13.1.  Normative References . . . . . . . . . . . . . . . . . .  27
 
 
 
@@ -114,16 +114,17 @@ Rescorla, et al.        Expires 20 December 2020                [Page 2]
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
+     13.1.  Normative References . . . . . . . . . . . . . . . . . .  27
      13.2.  Informative References . . . . . . . . . . . . . . . . .  28
    Appendix A.  Alternative SNI Protection Designs . . . . . . . . .  29
      A.1.  TLS-layer . . . . . . . . . . . . . . . . . . . . . . . .  29
-       A.1.1.  TLS in Early Data . . . . . . . . . . . . . . . . . .  29
+       A.1.1.  TLS in Early Data . . . . . . . . . . . . . . . . . .  30
        A.1.2.  Combined Tickets  . . . . . . . . . . . . . . . . . .  30
      A.2.  Application-layer . . . . . . . . . . . . . . . . . . . .  30
-       A.2.1.  HTTP/2 CERTIFICATE Frames . . . . . . . . . . . . . .  30
-   Appendix B.  Total Client Hello Encryption  . . . . . . . . . . .  30
-   Appendix C.  Acknowledgements . . . . . . . . . . . . . . . . . .  31
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  31
+       A.2.1.  HTTP/2 CERTIFICATE Frames . . . . . . . . . . . . . .  31
+   Appendix B.  Total Client Hello Encryption  . . . . . . . . . . .  31
+   Appendix C.  Acknowledgements . . . . . . . . . . . . . . . . . .  32
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  32
 
 1.  Introduction
 
@@ -159,7 +160,6 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
    concealing the fact that the SNI is being protected.  Unfortunately,
    the result often has undesirable performance consequences, incomplete
    coverage, or both.
-
 
 
 
@@ -810,7 +810,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
    Clients then encrypt the second ClientHelloInner using this new HPKE
    context.  In doing so, the encrypted value is also authenticated by
-   ech_hrr_key.  The rationale for this is described in Section 10.7.2.
+   ech_hrr_key.  The rationale for this is described in Section 10.8.2.
 
    Client-facing servers perform the corresponding process when
    decrypting second ClientHelloInner messages.  In particular, upon
@@ -1026,15 +1026,6 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
    attempt to use another server from the DNS results, if one is
    provided.
 
-   Client-facing servers with non-uniform cryptographic configurations
-   across backend origin servers segment the ECH anonymity set based on
-   these configurations.  For example, if a client-facing server hosts k
-   backend origin servers, and exactly one of those backend origin
-   servers supports a different set of cryptographic algorithms than the
-   other (k - 1) servers, it may be possible to identify this single
-   server based on the contents of the ServerHello as this message is
-   not encrypted.
-
 9.2.  Middleboxes
 
    A more serious problem is MITM proxies which do not support this
@@ -1055,6 +1046,15 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
    causes a hard failure.  Clients SHOULD NOT attempt to repair the
    connection in this case.
 
+10.  Security Considerations
+
+10.1.  Security and Privacy Goals
+
+   Informally, the primary security and privacy goals of ECH against an
+   active attacker are as follows:
+
+   1.  Use of ECH does not weaken the security properties of TLS without
+       ECH.
 
 
 
@@ -1066,9 +1066,28 @@ Rescorla, et al.        Expires 20 December 2020               [Page 19]
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
-10.  Security Considerations
+   2.  TLS connection establishment to a host with a specific ECHConfig
+       and TLS configuration is indistinguishable from a connection to
+       any other host with the same ECHConfig and TLS configuration.
+       (The set of hosts which share the same ECHConfig and TLS
+       configuration is referred to as the anonymity set.)
 
-10.1.  Why is cleartext DNS OK?
+   Client-facing server configuration determines the size of the
+   anonymity set.  For example, if a client-facing server uses distinct
+   ECHConfig values for each host, then each anonymity set has size k =
+   1.  Client-facing servers SHOULD deploy ECH in such a way so as to
+   maximize the size of the anonymity set where possible.  This means
+   client-facing servers should use the same ECHConfig for as many hosts
+   as possible.  An attacker can distinguish two hosts that have
+   different ECHConfig values based on the
+   ClientEncryptedCH.record_digest value.  This also means public
+   information in a TLS handshake is also consistent across hosts.  For
+   example, if a client-facing server services many backend origin
+   hosts, only one of which supports some cipher suite, it may be
+   possible to identify that host based on the contents of unencrypted
+   handshake messages.
+
+10.2.  Unauthenticated and Cleartext DNS
 
    In comparison to [I-D.kazuho-protected-sni], wherein DNS Resource
    Records are signed via a server private key, ECH records have no
@@ -1091,7 +1110,19 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
    in the introduction, SNI encryption is less useful without encryption
    of DNS queries in transit via DoH or DPRIVE mechanisms.
 
-10.2.  Client Tracking
+
+
+
+
+
+
+
+Rescorla, et al.        Expires 20 December 2020               [Page 20]
+
+Internet-Draft         TLS Encrypted Client Hello              June 2020
+
+
+10.3.  Client Tracking
 
    A malicious client-facing server could distribute unique, per-client
    ECHConfig structures as a way of tracking clients across subsequent
@@ -1106,7 +1137,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
    TTLs, challenging.  Clients can help mitigate this problem by
    flushing any DNS or ECHConfig state upon changing networks.
 
-10.3.  Optional Record Digests and Trial Decryption
+10.4.  Optional Record Digests and Trial Decryption
 
    Optional record digests may be useful in scenarios where clients and
    client-facing servers do not want to reveal information about the
@@ -1114,14 +1145,6 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
    such settings, clients send either an empty record_digest or a
    randomly generated record_digest in the ClientEncryptedCH.  (The
    precise implementation choice for this mechanism is out of scope for
-
-
-
-Rescorla, et al.        Expires 20 December 2020               [Page 20]
-
-Internet-Draft         TLS Encrypted Client Hello              June 2020
-
-
    this document.)  Servers in these settings must perform trial
    decryption since they cannot identify the client's chosen ECH key
    using the record_digest value.  As a result, support for optional
@@ -1132,7 +1155,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
    implement some form of rate limiting mechanism to limit the damage
    caused by such attacks.
 
-10.4.  Related Privacy Leaks
+10.5.  Related Privacy Leaks
 
    ECH requires encrypted DNS to be an effective privacy protection
    mechanism.  However, verifying the server's identity from the
@@ -1145,29 +1168,6 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
    specific traffic for additional information sources as part of
    verification.
 
-   Implementations SHOULD avoid leaking information that may identify
-   the server.  Even when sent over an encrypted transport, such
-   requests may result in indirect exposure of the server's identity,
-   such as indicating a specific CA or service being used.  To mitigate
-   this risk, servers SHOULD deliver such information in-band when
-   possible, such as through the use of OCSP stapling, and clients
-   SHOULD take steps to minimize or protect such requests during
-   certificate validation.
-
-10.5.  Comparison Against Criteria
-
-   [I-D.ietf-tls-sni-encryption] lists several requirements for SNI
-   encryption.  In this section, we re-iterate these requirements and
-   assess the ECH design against them.
-
-10.5.1.  Mitigate against replay attacks
-
-   Since servers process either ClientHelloInner or ClientHelloOuter,
-   and ClientHelloInner contains an HPKE-derived nonce, it is not
-   possible for an attacker to "cut and paste" the ECH value in a
-   different Client Hello and learn information from ClientHelloInner.
-   This is because the attacker lacks access to the HPKE-derived nonce
-   used to derive the handshake secrets.
 
 
 
@@ -1178,7 +1178,31 @@ Rescorla, et al.        Expires 20 December 2020               [Page 21]
 Internet-Draft         TLS Encrypted Client Hello              June 2020
 
 
-10.5.2.  Avoid widely-deployed shared secrets
+   Implementations SHOULD avoid leaking information that may identify
+   the server.  Even when sent over an encrypted transport, such
+   requests may result in indirect exposure of the server's identity,
+   such as indicating a specific CA or service being used.  To mitigate
+   this risk, servers SHOULD deliver such information in-band when
+   possible, such as through the use of OCSP stapling, and clients
+   SHOULD take steps to minimize or protect such requests during
+   certificate validation.
+
+10.6.  Comparison Against Criteria
+
+   [I-D.ietf-tls-sni-encryption] lists several requirements for SNI
+   encryption.  In this section, we re-iterate these requirements and
+   assess the ECH design against them.
+
+10.6.1.  Mitigate against replay attacks
+
+   Since servers process either ClientHelloInner or ClientHelloOuter,
+   and ClientHelloInner contains an HPKE-derived nonce, it is not
+   possible for an attacker to "cut and paste" the ECH value in a
+   different Client Hello and learn information from ClientHelloInner.
+   This is because the attacker lacks access to the HPKE-derived nonce
+   used to derive the handshake secrets.
+
+10.6.2.  Avoid widely-deployed shared secrets
 
    This design depends upon DNS as a vehicle for semi-static public key
    distribution.  Server operators may partition their private keys
@@ -1189,7 +1213,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
    by publishing different DNS records containing ECHConfig values with
    different keys using a short TTL.
 
-10.5.3.  Prevent SNI-based DoS attacks
+10.6.3.  Prevent SNI-based DoS attacks
 
    This design requires servers to decrypt ClientHello messages with
    ClientEncryptedCH extensions carrying valid digests.  Thus, it is
@@ -1197,7 +1221,20 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
    server.  This attack is bound by the number of valid TCP connections
    an attacker can open.
 
-10.5.4.  Do not stick out
+
+
+
+
+
+
+
+
+Rescorla, et al.        Expires 20 December 2020               [Page 22]
+
+Internet-Draft         TLS Encrypted Client Hello              June 2020
+
+
+10.6.4.  Do not stick out
 
    The only explicit signal indicating possible use of ECH is the
    ClientHello "encrypted_client_hello" extension.  Server handshake
@@ -1211,34 +1248,23 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
    Web browsers start using ECH, the presence of this value will not
    signal unusual behavior to passive eavesdroppers.
 
-10.5.5.  Forward secrecy
+10.6.5.  Forward secrecy
 
    This design is not forward secret because the server's ECH key is
    static.  However, the window of exposure is bound by the key
    lifetime.  It is RECOMMENDED that servers rotate keys frequently.
 
-10.5.6.  Proper security context
+10.6.6.  Proper security context
 
    This design permits servers operating in Split Mode to forward
    connections directly to backend origin servers, thereby avoiding
    unnecessary MiTM attacks.
 
-
-
-
-
-
-
-Rescorla, et al.        Expires 20 December 2020               [Page 22]
-
-Internet-Draft         TLS Encrypted Client Hello              June 2020
-
-
-10.5.7.  Split server spoofing
+10.6.7.  Split server spoofing
 
    Assuming ECH records retrieved from DNS are authenticated, e.g., via
    DNSSEC or fetched from a trusted Recursive Resolver, spoofing a
-   server operating in Split Mode is not possible.  See Section 10.1 for
+   server operating in Split Mode is not possible.  See Section 10.2 for
    more details regarding cleartext DNS.
 
    Authenticating the ECHConfigs structure naturally authenticates the
@@ -1246,21 +1272,32 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
    the server because the client validates the server certificate
    against the public name before retrying.
 
-10.5.8.  Supporting multiple protocols
+10.6.8.  Supporting multiple protocols
 
    This design has no impact on application layer protocol negotiation.
    It may affect connection routing, server certificate selection, and
    client certificate verification.  Thus, it is compatible with
    multiple protocols.
 
-10.6.  Padding Policy
+
+
+
+
+
+
+Rescorla, et al.        Expires 20 December 2020               [Page 23]
+
+Internet-Draft         TLS Encrypted Client Hello              June 2020
+
+
+10.7.  Padding Policy
 
    Variations in the length of the ClientHelloInner ciphertext could
    leak information about the corresponding plaintext.  Section 7.2
    describes a RECOMMENDED padding mechanism for clients aimed at
    reducing potential information leakage.
 
-10.7.  Active Attack Mitigations
+10.8.  Active Attack Mitigations
 
    This section describes the rationale for ECH properties and mechanics
    as defenses against active attacks.  In all the attacks below, the
@@ -1268,7 +1305,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
    of the attacker is to learn private information about the inner
    ClientHello, such as the true SNI value.
 
-10.7.1.  Client Reaction Attack Mitigation
+10.8.1.  Client Reaction Attack Mitigation
 
    This attack uses the client's reaction to an incorrect certificate as
    an oracle.  The attacker intercepts a legitimate ClientHello and
@@ -1282,14 +1319,6 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
    is "example.com," and the attacker replied with a Certificate for
    "test.com".  If the client produces a verification failure alert
    because of the mismatch faster than it would due to the Certificate
-
-
-
-Rescorla, et al.        Expires 20 December 2020               [Page 23]
-
-Internet-Draft         TLS Encrypted Client Hello              June 2020
-
-
    signature validation, information about the name leaks.  Note that
    the attacker can also withhold the CertificateVerify message.  In
    that scenario, a client which first verifies the Certificate would
@@ -1310,6 +1339,13 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
       Alert
                     ------>
 
+
+
+Rescorla, et al.        Expires 20 December 2020               [Page 24]
+
+Internet-Draft         TLS Encrypted Client Hello              June 2020
+
+
                       Figure 3: Client reaction attack
 
    The "ech_nonce" extension in the inner ClientHello prevents this
@@ -1318,7 +1354,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
    needed for encrypting the Certificate message.  Thus, the client will
    fail to decrypt the Certificate and abort the connection.
 
-10.7.2.  HelloRetryRequest Hijack Mitigation
+10.8.2.  HelloRetryRequest Hijack Mitigation
 
    This attack aims to exploit server HRR state management to recover
    information about a legitimate ClientHello using its own attacker-
@@ -1333,18 +1369,6 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
    first ClientHello and the key share from the second (attacker-
    controlled) ClientHello, the Certificate produced would leak the
    client's chosen SNI to the attacker.
-
-
-
-
-
-
-
-
-Rescorla, et al.        Expires 20 December 2020               [Page 24]
-
-Internet-Draft         TLS Encrypted Client Hello              June 2020
-
 
     Client                         Attacker                      Server
       ClientHello
@@ -1369,6 +1393,15 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
                  Figure 4: HelloRetryRequest hijack attack
 
+
+
+
+
+Rescorla, et al.        Expires 20 December 2020               [Page 25]
+
+Internet-Draft         TLS Encrypted Client Hello              June 2020
+
+
    This attack is mitigated by binding the first and second ClientHello
    messages together.  In particular, since the attacker does not
    possess the ech_hrr_key, it cannot generate a valid encryption of the
@@ -1384,7 +1417,7 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
    for equality and changes behavior based on the result can be used as
    an oracle to learn the client's SNI.
 
-10.7.3.  Resumption PSK Oracle Mitigation
+10.8.3.  Resumption PSK Oracle Mitigation
 
    This attack uses resumption PSKs as an oracle for dictionary attacks
    against a given ClientHello's true SNI.  To begin, the attacker first
@@ -1394,14 +1427,6 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
    own ticket and forwards the resulting ClientHello.  Assume the server
    then validates the PSK binder on the outer ClientHello and chooses
    connection parameters based on the inner ClientHello.  A server which
-
-
-
-Rescorla, et al.        Expires 20 December 2020               [Page 25]
-
-Internet-Draft         TLS Encrypted Client Hello              June 2020
-
-
    then validates information in the outer ClientHello ticket against
    information in the inner ClientHello, such as the SNI, introduces an
    oracle that can be used to test the encrypted SNI value of specific
@@ -1426,6 +1451,13 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
                Figure 5: Message flow for resumption and PSK
 
+
+
+Rescorla, et al.        Expires 20 December 2020               [Page 26]
+
+Internet-Draft         TLS Encrypted Client Hello              June 2020
+
+
    ECH mitigates against this attack by requiring servers not mix-and-
    match information from the inner and outer ClientHello.  For example,
    if the server accepts the inner ClientHello, it does not validate
@@ -1448,15 +1480,6 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
 
    3.  outer_extension(0xff04), with the "TLS 1.3" column values being
        set to "CH", and "Recommended" column being set to "Yes".
-
-
-
-
-
-Rescorla, et al.        Expires 20 December 2020               [Page 26]
-
-Internet-Draft         TLS Encrypted Client Hello              June 2020
-
 
 11.2.  Update of the TLS Alert Registry
 
@@ -1484,6 +1507,13 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
               dnsop-svcb-https-00, 12 June 2020, <http://www.ietf.org/
               internet-drafts/draft-ietf-dnsop-svcb-https-00.txt>.
 
+
+
+Rescorla, et al.        Expires 20 December 2020               [Page 27]
+
+Internet-Draft         TLS Encrypted Client Hello              June 2020
+
+
    [I-D.ietf-tls-exported-authenticator]
               Sullivan, N., "Exported Authenticators in TLS", Work in
               Progress, Internet-Draft, draft-ietf-tls-exported-
@@ -1505,14 +1535,6 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
    [RFC7685]  Langley, A., "A Transport Layer Security (TLS) ClientHello
               Padding Extension", RFC 7685, DOI 10.17487/RFC7685,
               October 2015, <https://www.rfc-editor.org/info/rfc7685>.
-
-
-
-
-Rescorla, et al.        Expires 20 December 2020               [Page 27]
-
-Internet-Draft         TLS Encrypted Client Hello              June 2020
-
 
    [RFC7918]  Langley, A., Modadugu, N., and B. Moeller, "Transport
               Layer Security (TLS) False Start", RFC 7918,
@@ -1540,6 +1562,14 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
               dns-over-https-14, 16 August 2018, <http://www.ietf.org/
               internet-drafts/draft-ietf-doh-dns-over-https-14.txt>.
 
+
+
+
+Rescorla, et al.        Expires 20 December 2020               [Page 28]
+
+Internet-Draft         TLS Encrypted Client Hello              June 2020
+
+
    [I-D.ietf-tls-sni-encryption]
               Huitema, C. and E. Rescorla, "Issues and Requirements for
               SNI Encryption in TLS", Work in Progress, Internet-Draft,
@@ -1563,13 +1593,6 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
               Layer Security (TLS)", RFC 7858, DOI 10.17487/RFC7858, May
               2016, <https://www.rfc-editor.org/info/rfc7858>.
 
-
-
-Rescorla, et al.        Expires 20 December 2020               [Page 28]
-
-Internet-Draft         TLS Encrypted Client Hello              June 2020
-
-
    [RFC8094]  Reddy, T., Wing, D., and P. Patil, "DNS over Datagram
               Transport Layer Security (DTLS)", RFC 8094,
               DOI 10.17487/RFC8094, February 2017,
@@ -1588,6 +1611,20 @@ Appendix A.  Alternative SNI Protection Designs
    this document.
 
 A.1.  TLS-layer
+
+
+
+
+
+
+
+
+
+
+Rescorla, et al.        Expires 20 December 2020               [Page 29]
+
+Internet-Draft         TLS Encrypted Client Hello              June 2020
+
 
 A.1.1.  TLS in Early Data
 
@@ -1611,21 +1648,6 @@ A.1.1.  TLS in Early Data
    distinct Client Hello extension and neither abuses early data nor
    requires a bootstrapping connection.
 
-
-
-
-
-
-
-
-
-
-
-Rescorla, et al.        Expires 20 December 2020               [Page 29]
-
-Internet-Draft         TLS Encrypted Client Hello              June 2020
-
-
 A.1.2.  Combined Tickets
 
    In this variant, client-facing and backend servers coordinate to
@@ -1639,6 +1661,26 @@ A.1.2.  Combined Tickets
    contrast, encrypted SNI requires no such coordination.
 
 A.2.  Application-layer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Rescorla, et al.        Expires 20 December 2020               [Page 30]
+
+Internet-Draft         TLS Encrypted Client Hello              June 2020
+
 
 A.2.1.  HTTP/2 CERTIFICATE Frames
 
@@ -1671,17 +1713,6 @@ Appendix B.  Total Client Hello Encryption
 
    It also has the following disadvantages:
 
-
-
-
-
-
-
-Rescorla, et al.        Expires 20 December 2020               [Page 30]
-
-Internet-Draft         TLS Encrypted Client Hello              June 2020
-
-
    *  The client-facing server can still see the other extensions.  By
       contrast we could introduce another EncryptedExtensions block that
       was encrypted to the backend server and not the client-facing
@@ -1694,6 +1725,18 @@ Internet-Draft         TLS Encrypted Client Hello              June 2020
    *  A conforming middlebox will strip every extension, which might
       result in a ClientHello which is just unacceptable to the server
       (more analysis needed).
+
+
+
+
+
+
+
+
+Rescorla, et al.        Expires 20 December 2020               [Page 31]
+
+Internet-Draft         TLS Encrypted Client Hello              June 2020
+
 
 Appendix C.  Acknowledgements
 
@@ -1733,4 +1776,17 @@ Authors' Addresses
 
 
 
-Rescorla, et al.        Expires 20 December 2020               [Page 31]
+
+
+
+
+
+
+
+
+
+
+
+
+
+Rescorla, et al.        Expires 20 December 2020               [Page 32]
