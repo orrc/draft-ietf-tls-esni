@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-06-18T02:33:33.227104+00:00",
+  "timestamp": "2020-06-24T12:42:15.532903+00:00",
   "repo": "tlswg/draft-ietf-tls-esni",
   "labels": [
     {
@@ -4891,14 +4891,38 @@
       "id": "MDU6SXNzdWU2NDAzMTIxNjk=",
       "title": "Describe risks and mitigations for privacy leaks from configuration digest",
       "url": "https://github.com/tlswg/draft-ietf-tls-esni/issues/245",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "sharpie7",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "The ID proposes an optional configuration digest parameter to be included in the clientHello. This parameter is advantageous because it improves the efficiency of the solution by avoiding the server having to do trial decryptions. However, in some scenarios the configuration digest could leak privacy information. In version 7 of the ID, section 10.2 on \u201cClient Tracking\u201d describes one scenario, but there are others. A more complete and general discussion of the risks and mitigations would be useful.\r\n\r\nIf a particular domain has a unique public key then the configuration digest becomes a fingerprint for that domain. An attacker that has a list of such domains that they want to monitor can build a dictionary of the corresponding digests use this to identify traffic to the domains on their list.\r\n\r\nSome mitigations could be:\r\n1)\tAvoid the use of configuration digest\r\n2)\tOnly deploy in a mode where many domains share the same public key to make finger-printing too general to be useful\r\n3)\tTo change keys faster than attackers can update their list of fingerprints\r\n",
       "createdAt": "2020-06-17T10:02:52Z",
-      "updatedAt": "2020-06-17T10:02:52Z",
+      "updatedAt": "2020-06-18T02:50:27Z",
+      "closedAt": "2020-06-18T02:50:27Z",
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This should be addressed by #247. Please re-open (and suggest text edits!) if you think otherwise.",
+          "createdAt": "2020-06-18T02:50:26Z",
+          "updatedAt": "2020-06-18T02:50:26Z"
+        }
+      ]
+    },
+    {
+      "number": 248,
+      "id": "MDU6SXNzdWU2NDEzNzgyNTg=",
+      "title": "Decryption failure guidance could be more detailed for trial decryption",
+      "url": "https://github.com/tlswg/draft-ietf-tls-esni/issues/248",
+      "state": "OPEN",
+      "author": "raycoll",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Hello,\r\n\r\nIn section 8, there is a description of two approaches to match an ECHConfig with the ClientEncryptedCH:\r\n\r\n```\r\nThis matching procedure should be done using one of the following two checks:\r\n1. Compare ClientEncryptedCH.record_digest against cryptographic hashes of known ECHConfig and choose the one that matches.\r\n2. Use trial decryption of ClientEncryptedCH.encrypted_ch with known ECHConfig and choose the one that succeeds.\r\n```\r\n\r\nAnd later, we have guidance on what the server should do if decryption fails:\r\n\r\n```\r\nIf decryption fails, the server MUST abort the connection with a \"decrypt_error\" alert.\r\n```\r\n\r\nThis guidance makes sense to me for a server that is using record_digest matching to select an ECHConfig. If decryption fails using the matching record_digest, we must abort. However, I think it could be more clear for the trial decryption case, which is expected to have failed decryption attempt(s). \r\n\r\nI think something like this could be more clear:\r\n\r\n```\r\nIf record_digest matching is used and decryption fails using the matching ECHConfig, the server MUST abort the connection with a \"decrypt_error\" alert.\r\n```\r\n",
+      "createdAt": "2020-06-18T16:42:35Z",
+      "updatedAt": "2020-06-18T16:54:08Z",
       "closedAt": null,
       "comments": []
     }
@@ -16791,25 +16815,35 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDM2MDI3OTY3",
       "title": "Expand text around security and privacy goals.",
       "url": "https://github.com/tlswg/draft-ietf-tls-esni/pull/247",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Addresses #245.",
       "createdAt": "2020-06-17T18:39:45Z",
-      "updatedAt": "2020-06-17T23:43:09Z",
+      "updatedAt": "2020-06-18T08:48:35Z",
       "baseRepository": "tlswg/draft-ietf-tls-esni",
       "baseRefName": "master",
       "baseRefOid": "a40e95338385ef628cff3896ed61c31939143dd0",
       "headRepository": "tlswg/draft-ietf-tls-esni",
       "headRefName": "caw/expand-goals",
       "headRefOid": "2ce972f8b8236b16ea214fefb0ab925693097598",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2020-06-18T02:34:01Z",
+      "mergedAt": "2020-06-18T02:34:01Z",
+      "mergedBy": "ekr",
+      "mergeCommit": {
+        "oid": "675704cf71d2f090368a8dbbf5f50197519a1493"
+      },
+      "comments": [
+        {
+          "author": "sharpie7",
+          "authorAssociation": "NONE",
+          "body": "Thanks. The changes look to cover my point in #245.",
+          "createdAt": "2020-06-18T08:48:35Z",
+          "updatedAt": "2020-06-18T08:48:35Z"
+        }
+      ],
       "reviews": [
         {
           "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDMyNjkyMjAy",
