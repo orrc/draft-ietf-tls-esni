@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-06-24T12:42:15.532903+00:00",
+  "timestamp": "2020-06-27T15:51:17.803294+00:00",
   "repo": "tlswg/draft-ietf-tls-esni",
   "labels": [
     {
@@ -4915,16 +4915,38 @@
       "id": "MDU6SXNzdWU2NDEzNzgyNTg=",
       "title": "Decryption failure guidance could be more detailed for trial decryption",
       "url": "https://github.com/tlswg/draft-ietf-tls-esni/issues/248",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "raycoll",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "Hello,\r\n\r\nIn section 8, there is a description of two approaches to match an ECHConfig with the ClientEncryptedCH:\r\n\r\n```\r\nThis matching procedure should be done using one of the following two checks:\r\n1. Compare ClientEncryptedCH.record_digest against cryptographic hashes of known ECHConfig and choose the one that matches.\r\n2. Use trial decryption of ClientEncryptedCH.encrypted_ch with known ECHConfig and choose the one that succeeds.\r\n```\r\n\r\nAnd later, we have guidance on what the server should do if decryption fails:\r\n\r\n```\r\nIf decryption fails, the server MUST abort the connection with a \"decrypt_error\" alert.\r\n```\r\n\r\nThis guidance makes sense to me for a server that is using record_digest matching to select an ECHConfig. If decryption fails using the matching record_digest, we must abort. However, I think it could be more clear for the trial decryption case, which is expected to have failed decryption attempt(s). \r\n\r\nI think something like this could be more clear:\r\n\r\n```\r\nIf record_digest matching is used and decryption fails using the matching ECHConfig, the server MUST abort the connection with a \"decrypt_error\" alert.\r\n```\r\n",
       "createdAt": "2020-06-18T16:42:35Z",
-      "updatedAt": "2020-06-18T16:54:08Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2020-06-25T23:52:03Z",
+      "closedAt": "2020-06-25T23:51:01Z",
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think this is clarified above in that section. Namely, for trial decryption, we say that the record_digest does not \"match\" the ClientHello if there's no key which successfully decrypts the ClientHello. In this case, the server ignores the ECH extension and proceeds as specified. A \"match\" in the trial decryption case therefore implies that a key successfully decrypts the ClientHello, so the text referenced (\"If decryption fails...\") does not apply. ",
+          "createdAt": "2020-06-25T23:45:20Z",
+          "updatedAt": "2020-06-25T23:49:06Z"
+        },
+        {
+          "author": "ekr",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I also feel like this is clear.",
+          "createdAt": "2020-06-25T23:51:01Z",
+          "updatedAt": "2020-06-25T23:51:01Z"
+        },
+        {
+          "author": "raycoll",
+          "authorAssociation": "NONE",
+          "body": "On reread, that makes sense. Thanks!",
+          "createdAt": "2020-06-25T23:52:03Z",
+          "updatedAt": "2020-06-25T23:52:03Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -16946,6 +16968,34 @@
           ]
         }
       ]
+    },
+    {
+      "number": 249,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDQwMzA5MTgw",
+      "title": "Move to Standards track.",
+      "url": "https://github.com/tlswg/draft-ietf-tls-esni/pull/249",
+      "state": "MERGED",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2020-06-25T23:39:37Z",
+      "updatedAt": "2020-06-27T15:50:42Z",
+      "baseRepository": "tlswg/draft-ietf-tls-esni",
+      "baseRefName": "master",
+      "baseRefOid": "675704cf71d2f090368a8dbbf5f50197519a1493",
+      "headRepository": "tlswg/draft-ietf-tls-esni",
+      "headRefName": "caw/std",
+      "headRefOid": "3b4fa8dbe997161eb2ab4eee5e7560c22ecd3fe1",
+      "closedAt": "2020-06-27T15:50:41Z",
+      "mergedAt": "2020-06-27T15:50:41Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "ce728f09363ef83341d77ba6f7d9d9b2732bd053"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
